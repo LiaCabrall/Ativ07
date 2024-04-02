@@ -1,0 +1,299 @@
+let prompt = require('prompt-sync')();
+
+mainMenu();
+function mainMenu(){   
+
+console.log("Digite 1 - Cálculo de potência de um número.");
+console.log("Digite 2 - Contagem de números pares e ímpares.");
+console.log("Digite 3 - Geração da série de Fibonacci até o n-ésimo termo.");
+console.log("Digite 4 - Cálculo do fatorial de um número inteiro.");
+console.log("Digite 5 - Identificação do menor valor, maior valor e soma de um conjunto de números.");
+console.log("Digite 6 - Identificação do menor valor, maior valor e soma de um conjunto de números (entre 0 e 1000).");
+console.log("Digite 7 - Cálculo do fatorial de números inteiros positivos menores que 16.");
+console.log("Digite 8 - Verificação de número primo.");
+console.log("Digite 9 - Verificação de número primo e identificação dos divisores, se não for primo.");
+console.log("Digite 10 - Listagem de números primos até N e número de divisões realizadas.");
+console.log("Digite 11 - Cálculo da média aritmética de N notas.");
+
+let escolha = Number(prompt("Digite a opção desejada: "));
+
+if(escolha == 1){
+    Escolha01();
+}
+else if(escolha == 2){
+    Escolha02();
+}
+else if (escolha == 3){
+    Escolha03();
+}
+else if (escolha == 4){
+    Escolha04();
+}
+else if (escolha == 5){
+    Escolha05();
+}
+else if (escolha == 6){
+    Escolha06();
+}
+else if (escolha == 7){
+    Escolha07();
+}
+else if (escolha == 8){
+    Escolha08();
+}
+else if (escolha == 9){
+    Escolha09();
+}
+else if (escolha == 10){
+    Escolha10();
+}
+else if (escolha == 11){
+    Escolha11();
+}
+
+else{
+    console.log("DIGITE UMA OPÇÃO VALIDA")
+    mainMenu();
+}
+}
+function Escolha01(){
+
+let base = Number(prompt("Digite a base: "));
+let expoente = Number(prompt("Digite o expoente: "));
+let resultado = 1;
+
+for (let i = 1; i <= expoente; i++) {
+    resultado *= base;
+}
+
+console.log(`${base} elevado a ${expoente} = ${resultado}`);
+
+}
+function Escolha02(){
+
+    let numerosPares = 0;
+let numerosImpares = 0;
+
+for (let i = 0; i < 10; i++) {
+    let numero = parseInt(prompt(`Digite o ${i + 1}º número inteiro:`));
+
+    if (numero % 2 === 0) {
+        numerosPares++;
+    } else {
+        numerosImpares++;
+    }
+}
+
+console.log(`Quantidade de números pares: ${numerosPares}`);
+console.log(`Quantidade de números ímpares: ${numerosImpares}`);
+
+}
+function Escolha03(){
+
+let termo1 = 0, termo2 = 1;
+
+do {
+    console.log(termo1);
+    let proximoTermo = termo1 + termo2;
+    termo1 = termo2;
+    termo2 = proximoTermo;
+} while (termo1 <= 500);
+
+
+}
+function Escolha04(){
+
+    let numero = Number(prompt("Digite um número inteiro: "));
+
+
+        let fatorial = 1;
+        for (let i = 1; i <= numero; i++) {
+            fatorial *= i;
+        }
+        console.log("O fatorial de " + numero + " é " + fatorial)
+    
+
+}
+function Escolha05(){
+
+let quantidadeNumeros = parseInt(prompt("Digite a quantidade de números:"));
+
+if (isNaN(quantidadeNumeros) || quantidadeNumeros <= 0) {
+    console.log("Quantidade inválida. Por favor, insira um número inteiro maior que zero.");
+} else {
+    let menorValor = Infinity;
+    let maiorValor = -Infinity;
+    let soma = 0;
+
+    for (let i = 0; i < quantidadeNumeros; i++) {
+        let numero = parseFloat(prompt(`Digite o ${i + 1}º número:`));
+
+        if (!isNaN(numero)) {
+            menorValor = Math.min(menorValor, numero);
+            maiorValor = Math.max(maiorValor, numero);
+            soma += numero;
+        } else {
+            console.log(`Número inválido. Ignorando.`);
+            i--;
+        }
+    }
+
+    if (menorValor !== Infinity && maiorValor !== -Infinity) {
+        console.log(`Menor valor: ${menorValor}`);
+        console.log(`Maior valor: ${maiorValor}`);
+        console.log(`Soma dos valores: ${soma}`);
+    } else {
+        console.log("Nenhum número válido inserido.");
+    }
+}
+
+}
+function Escolha06(){
+   
+let quantidadeNumeros = parseInt(prompt("Digite a quantidade de números:"));
+
+    let menorValor = Infinity;
+    let maiorValor = -Infinity;
+    let soma = 0;
+
+    for (let i = 0; i < quantidadeNumeros; i++) {
+        let numero = parseFloat(prompt(`Digite o ${i + 1}º número:`));
+
+        if (numero >= 0 && numero <= 1000) {
+            menorValor = Math.min(menorValor, numero);
+            maiorValor = Math.max(maiorValor, numero);
+            soma += numero;
+        } else {
+            console.log(`Número inválido. Ignorando.`);
+            i--;
+        }
+    }
+
+    if (menorValor !== Infinity && maiorValor !== -Infinity) {
+        console.log(`Menor valor: ${menorValor}`);
+        console.log(`Maior valor: ${maiorValor}`);
+        console.log(`Soma dos valores: ${soma}`);
+    } else {
+        console.log("Nenhum número válido inserido.");
+    }
+
+}
+function Escolha07(){
+
+while (true) {
+    let numero = parseInt(prompt("Digite um número inteiro positivo (0 a 15) para calcular o fatorial, ou digite -1 para sair:"));
+
+    if (numero === -1) {
+        console.log("Programa encerrado.");
+        break;
+    }
+
+    if (numero < 0 || numero > 15 || isNaN(numero)) {
+        console.log("Número inválido. Por favor, insira um número inteiro positivo entre 0 e 15.");
+    } else {
+        let fatorial = 1;
+
+        for (let i = 1; i <= numero; i++) {
+            fatorial *= i;
+        }
+
+        console.log(`${numero}! = ${fatorial}`);
+    }
+}
+
+       
+    
+
+}
+function Escolha08(){
+    let numero = parseInt(prompt("Digite um número inteiro para verificar se é primo:"));
+
+    let primo = true;
+    
+    if (numero <= 1) {
+        primo = false;
+    } else {
+        for (let i = 2; i <= Math.sqrt(numero); i++) {
+            if (numero % i === 0) {
+                primo = false;
+                break;
+            }
+        }
+    }
+    
+    if (primo) {
+        console.log(`${numero} é um número primo.`);
+    } else {
+        console.log(`${numero} não é um número primo.`);
+    }
+    
+} 
+function Escolha09(){
+    let numero = parseInt(prompt("Digite um número inteiro para verificar se é primo:"));
+
+    let primo = true;
+    let divisores = [];
+    
+    if (numero <= 1) {
+        primo = false;
+    } else {
+        for (let i = 2; i <= Math.sqrt(numero); i++) {
+            if (numero % i === 0) {
+                primo = false;
+                divisores.push(i); // Adiciona o divisor à lista de divisores
+            }
+        }
+    }
+    
+    if (primo) {
+        console.log(`${numero} é um número primo.`);
+    } else {
+        console.log(`${numero} não é um número primo.`);
+        console.log(`Divisível por: ${divisores.join(', ')}`);
+    }
+    
+    
+
+}
+function Escolha10(){
+    let N = parseInt(prompt("Digite um número inteiro para encontrar todos os números primos até ele:"));
+
+let primosEncontrados = [];
+let divisoes = 0;
+
+for (let numero = 2; numero <= N; numero++) {
+    let primo = true;
+
+    for (let i = 2; i <= Math.sqrt(numero); i++) {
+        divisoes++;
+
+        if (numero % i === 0) {
+            primo = false;
+            break;
+        }
+    }
+
+    if (primo) {
+        primosEncontrados.push(numero);
+    }
+}
+
+console.log(`Números primos entre 1 e ${N}: ${primosEncontrados.join(', ')}`);
+console.log(`Número total de divisões: ${divisoes}`);
+
+}
+function Escolha11(){
+    let totalNotas = parseInt(prompt("Digite o número de notas:"));
+    let soma = 0;
+    
+    for (let i = 1; i <= totalNotas; i++) {
+        let nota = parseFloat(prompt(`Digite a ${i}ª nota:`));
+        soma += nota;
+    }
+    
+    let media = soma / totalNotas;
+    
+    console.log(`A média aritmética das ${totalNotas} notas é: ${media}`);
+    
+
+}
