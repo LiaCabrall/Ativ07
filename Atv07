@@ -52,7 +52,7 @@ else if (escolha == 11){
 }
 
 else{
-    console.log("DIGITE UMA OPÇÃO VALIDA")
+    console.log("Digite uma opção válida")
     mainMenu();
 }
 }
